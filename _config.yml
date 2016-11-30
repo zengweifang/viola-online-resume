@@ -1,50 +1,46 @@
-# Site settings
-title: "Yolanda's Blog"
-email: yolandazeng.no1@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  "Yolanda's Tech Blog"
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yansu.org" # the base hostname & protocol for your site
-rss_url: /pages/feed.xml
-author: Su Yan
-twitter:
-  username: masonsuyan
+# Site wide configuration
 
-# Sidebar filter
-# Choose 'tag' or 'category' as filter in sidebar.
-filter: 'category'
+title: "yolanda's Tech Blog"
+description: "Collection of everythings I want to record down especially for tech"
+logo: logo.jpg # 120x120 px default image used for Twitter summary card
+teaser: /teaser/default.jpg # 400x250 px default teaser image used in image archive grid
+locale:
+url:
 
-# Social account
-twitter: masonsuyan
-# weibo:    ID
-github: suyan
-# codepen:  username
-# dribbble: username
+default:
+    -
+        scope:
+            type: "article"
+        values:
+            ads: false
+            toc: false 
 
-# avatar and Favicon
-avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
-favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
 
-# disqus config
-disqus:
-  shortname: suyan-en
+# Jekyll configuration
 
-# google analytics config
-ga:
-  id: UA-54767140-2
-  url: yansu.org
-
-# Build settings
-permalink: /:year/:month/:day/:title.html
-markdown: kramdown
-highlighter: rouge
 sass:
-  style: compressed
-
-# Jekyll Plugin
-# https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/
+    sass_dir: _sass
+    style: compressed
+permalink: /:categories/:title/
+markdown: kramdown
+kramdown:
+    input: GFM
+highlighter: pygments
 gems:
   - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-feed
 
+
+# Site owner
+owner: 
+  name: yolanda
+  email: yolandazeng.no1@gmail.com
+  twitter: yolanda
+  google:
+    ad-client: "ca-pub-5984522345984184"
+    ad-slot: "9439014959"
+  bio: 
+  avatar: logo.jpg # 160x160 px image for author byline
+disqus-shortname: yolanda
+
+
+exclude: ["lib", "config.rb", ".sass-cache", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "*.sublime-project", "*.sublime-workspace", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "node_modules", "Gruntfile.js", "package.json"]
