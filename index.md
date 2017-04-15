@@ -1,6 +1,5 @@
 ---
 layout: archive
-permalink: /
 title: "Latest Posts"
 image: 
     feature: cover.jpg
@@ -9,7 +8,7 @@ image:
 ---
 
 <div class="tiles">
-{% for post in site.posts %}
+{% for post in site.categories.basic %}
 	{% include post-grid.html %}
 {% endfor %}
 </div><!-- /.tiles -->

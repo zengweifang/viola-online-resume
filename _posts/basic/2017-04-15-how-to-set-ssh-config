@@ -3,7 +3,7 @@ layout: article
 title:  "Jekyll&Github Pages博客模板挑选和配置"
 toc: true
 disqus: true
-categories: jekyll
+categories: basic
 ---
 
 
@@ -210,6 +210,9 @@ disqus-shortname: cenalulu
 - social share link支持等
 
 当然读者也可以自己探索模板的具体配置方式，mmistake也提供了[官方配置文档](https://mmistakes.github.io/skinny-bones-jekyll/getting-started/)，同时也提供了[在线样例](https://mmistakes.github.io/skinny-bones-jekyll/)。如果读者觉得在线样例中的example page非常漂亮想要搬到自己Blog中来的话，也可以通过github的[gh-page branch](https://github.com/mmistakes/skinny-bones-jekyll/tree/gh-pages)来查看的具体markdown源文件的写法。
+
+
+
 
 
 
