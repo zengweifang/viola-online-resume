@@ -1,6 +1,7 @@
 ---
 layout: archive
 title: "Latest Posts"
+permalink: /
 image: 
     feature: cover.jpg
     credit: Hubber's high resolution photo
@@ -8,7 +9,7 @@ image:
 ---
 
 <div class="tiles">
-{% for post in site.categories.basic %}
+{% for post in site.posts %}
 	{% include post-grid.html %}
 {% endfor %}
 </div><!-- /.tiles -->
