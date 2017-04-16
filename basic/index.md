@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: "Latest Posts in *basic*"
-excerpt: "Introduction of how to build a blog like this from scratch"
+excerpt: "How to create project"
 ---
 
 <div class="tiles">
