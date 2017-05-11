@@ -1,7 +1,6 @@
 ---
 layout: article
 title:  "使用ztree实现异步加载行政区编辑功能"
-toc: true
 disqus: true
 categories: basic
 ---
@@ -37,7 +36,7 @@ Directive:
             },
             replace : true,
             templateUrl:'app/common/ztree.dialog.html',
-            controller : ['$scope','$timeout','CommonService','logger',function($scope,		$timeout,CommonService,logger){
+            controller : ['$scope','$timeout','CommonService','logger',function($scope,$timeout,CommonService,logger){
         		var zTreeObj;
 				// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 				function zTreeOnClick(event, treeId, treeNode){
