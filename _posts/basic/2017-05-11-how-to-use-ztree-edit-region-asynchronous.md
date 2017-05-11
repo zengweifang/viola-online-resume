@@ -19,7 +19,7 @@ categories: basic
 
 ---
 
-```python
+```javaScript
 Directive:
 (function(){
     "use strict";
@@ -36,75 +36,77 @@ Directive:
             },
             replace : true,
             templateUrl:'app/common/ztree.dialog.html',
-            controller : ['$scope','$timeout','CommonService','logger',function($scope,$timeout,CommonService,logger){
+            controller : ['$scope','$timeout','CommonService','logger',function($scope,$timeout,
+            CommonService,logger){
+                console.log(11)
         		var zTreeObj;
-				// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-				function zTreeOnClick(event, treeId, treeNode){
-		            var treeObj = $.fn.zTree.getZTreeObj(treeId);
-		            //传入参数当前节点id，以及回调函数_callBack
-		            $scope.getCityAllChildren({id:treeNode.id,_callBack:getChildrenInfo}); 第五步
-		            //传入子节点数据，并追加到当前父节点后面
-		            function getChildrenInfo(params){
-		                console.log(params)
-		                if(params.length!=0){
-		                    angular.forEach(params,function(item){
-		                        if(item.checked == null){
-		                            item.halfCheck=true;
-		                            // item.checked = true;
-		                        };
-		                    })
-		                    treeObj.halfCheck = false;
-		                    treeObj.addNodes(treeNode, params);
-		                };
-		            };
-		        };
+			   	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+			   	function zTreeOnClick(event, treeId, treeNode){
+                    var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                    //传入参数当前节点id，以及回调函数_callBack
+                    $scope.getCityAllChildren({id:treeNode.id,_callBack:getChildrenInfo});
+                    //传入子节点数据，并追加到当前父节点后面
+                    function getChildrenInfo(params){
+                        console.log(params)
+                        if(params.length!=0){
+                            angular.forEach(params,function(item){
+                                if(item.checked == null){
+                                    item.halfCheck=true;
+                                    // item.checked = true;
+                                };
+                            })
+                            treeObj.halfCheck = false;
+                            treeObj.addNodes(treeNode, params);
+                        };
+                    };
+                };
 
-		        function zTreeOnCheck(event, treeId, treeNode){
-		            //监听去调已选择的行政区
-		            // var nodeData = tree.jqxTree('getItem',event.args.element);
-		            // var data = tree.jqxTree('getCheckedItems');
-		            var treeObj = $.fn.zTree.getZTreeObj(treeId);
-		            var data = treeObj.getCheckedNodes(true);
-		            console.log(data)
-		            var temp = [];
-		            angular.forEach(data,function(i){
-		                var obj={
-		                    id:i.id,
-		                    level:i.level+1
-		                }
-		                temp.push(obj)
-		            });
-		            
-		            $scope.result.value = temp;
-		            // $scope.data.regionCheckDTOList = nodeData.id;
-		            var regionCheckDTOList = $scope.data.regionCheckDTOList;
-		            angular.forEach(regionCheckDTOList,function(item,key){
-		                if(item.id == treeNode.id){
-		                    regionCheckDTOList.splice(key,1);
-		                }
-		            })
-		            $scope.data.regionCheckDTOList = regionCheckDTOList;
-		        };
-		        var setting = {
-		            check:{
-		                enable: true,
-		                chkStyle: "checkbox",
-		                chkboxType: { "Y": "ps", "N": "ps" },
-		                // nocheckInherit:true
-		            },
-		            data:{
-		                simpleData: {
-		                    enable: true,
-		                    idKey: "id",
-		                    pIdKey: "parentId",
-		                    rootPId: 0
-		                }
-		            },
-		            callback: {
-		                onClick: zTreeOnClick,
-		                onCheck: zTreeOnCheck
-		            }
-		        };
+                function zTreeOnCheck(event, treeId, treeNode){
+                    //监听去调已选择的行政区
+                    // var nodeData = tree.jqxTree('getItem',event.args.element);
+                    // var data = tree.jqxTree('getCheckedItems');
+                    var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                    var data = treeObj.getCheckedNodes(true);
+                    console.log(data)
+                    var temp = [];
+                    angular.forEach(data,function(i){
+                        var obj={
+                            id:i.id,
+                            level:i.level+1
+                        }
+                        temp.push(obj)
+                    });
+                    
+                    $scope.result.value = temp;
+                    // $scope.data.regionCheckDTOList = nodeData.id;
+                    var regionCheckDTOList = $scope.data.regionCheckDTOList;
+                    angular.forEach(regionCheckDTOList,function(item,key){
+                        if(item.id == treeNode.id){
+                            regionCheckDTOList.splice(key,1);
+                        }
+                    })
+                    $scope.data.regionCheckDTOList = regionCheckDTOList;
+                };
+                var setting = {
+                    check:{
+                        enable: true,
+                        chkStyle: "checkbox",
+                        chkboxType: { "Y": "ps", "N": "ps" },
+                        // nocheckInherit:true
+                    },
+                    data:{
+                        simpleData: {
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parentId",
+                            rootPId: 0
+                        }
+                    },
+                    callback: {
+                        onClick: zTreeOnClick,
+                        onCheck: zTreeOnCheck
+                    }
+                };
                 
                 $scope.$watch('getSource',function(value){
                     var obj = value;
@@ -120,7 +122,7 @@ Directive:
                         })
                         var zNodes = temp;
                         $(document).ready(function(){
-                            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);第三步
+                            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                         }); 
                     }
                 });
@@ -134,7 +136,10 @@ Directive:
 
 ```python
 Html:
-<ztree-region-dir result="selectedRegionsData" data="regionsData" get-city-all-children='getChildrenData(id,_callBack)' get-source="getSource"></ztree-region-dir>
+<ztree-region-dir result="selectedRegionsData" data="regionsData" 
+get-city-all-children='getChildrenData(id,_callBack)' 
+get-source="getSource">
+</ztree-region-dir>
 ```
 
 ```python
@@ -202,7 +207,8 @@ function getRegionsData(value,regionTreeDTOList){
 
 
 保存时调用：
-var selectedRegions = getRegionsData($scope.selectedRegionsData.value,$scope.homePageCertaintyEditInfo.regionCheckDTOList);第七步
+var selectedRegions = getRegionsData($scope.selectedRegionsData.value,
+$scope.homePageCertaintyEditInfo.regionCheckDTOList);第七步
 ```
 ```python
 ztree.dialog.html:
