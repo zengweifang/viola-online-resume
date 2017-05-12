@@ -19,7 +19,7 @@ categories: basic
 
 ---
 
-```javaScript
+```python
 Directive:
 (function(){
     "use strict";
