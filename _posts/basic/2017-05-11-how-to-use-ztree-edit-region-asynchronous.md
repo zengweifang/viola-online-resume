@@ -36,63 +36,107 @@ Directive:
             },
             replace : true,
             templateUrl:'app/common/ztree.dialog.html',
-            controller : ['$scope','$timeout','CommonService','logger',function($scope,$timeout,
-            CommonService,logger){
-                console.log(11)
-        		var zTreeObj;
-			   	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-			   	function zTreeOnClick(event, treeId, treeNode){
-                    var treeObj = $.fn.zTree.getZTreeObj(treeId);
-                    //传入参数当前节点id，以及回调函数_callBack
-                    $scope.getCityAllChildren({id:treeNode.id,_callBack:getChildrenInfo});
-                    //传入子节点数据，并追加到当前父节点后面
-                    function getChildrenInfo(params){
-                        console.log(params)
-                        if(params.length!=0){
-                            angular.forEach(params,function(item){
-                                if(item.checked == null){
-                                    item.halfCheck=true;
-                                    // item.checked = true;
-                                };
-                            })
-                            treeObj.halfCheck = false;
-                            treeObj.addNodes(treeNode, params);
+            controller : ['$scope','$timeout','CommonService','logger',function($scope,$timeout,CommonService,logger){
+                var zTreeObj;
+                // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+                function zTreeOnClick(event, treeId, treeNode){
+                    var loader = $(event.target).attr("data-loaded");
+                    if(!loader && treeNode.id.length==4){
+                        $(event.target).attr("data-loaded",true);
+                        var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                        //传入参数当前节点id，以及回调函数_callBack
+                        $scope.getCityAllChildren({id:treeNode.id,_callBack:getChildrenInfo});
+                        //传入子节点数据，并追加到当前父节点后面
+                        function getChildrenInfo(params){
+                            
+                            if(params.length!=0){
+                                if(treeNode.checked){
+                                    angular.forEach(params,function(item){
+                                        item.checked = true;
+                                    });
+                                }
+                                treeObj.addNodes(treeNode, params);
+                            };
                         };
-                    };
+                    }
+                    
                 };
 
+                function cancelHalf(treeNode){
+                    if (treeNode.checkedEx) return;
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    treeNode.halfCheck = false;
+                    zTree.updateNode(treeNode); 
+                };
                 function zTreeOnCheck(event, treeId, treeNode){
+                    console.log(treeNode)
+                    //手动去掉当前节点半选状态
+                    cancelHalf(treeNode);  
                     //监听去调已选择的行政区
-                    // var nodeData = tree.jqxTree('getItem',event.args.element);
-                    // var data = tree.jqxTree('getCheckedItems');
                     var treeObj = $.fn.zTree.getZTreeObj(treeId);
                     var data = treeObj.getCheckedNodes(true);
-                    console.log(data)
+                    for (var i = data.length - 1; i >= 0; i--) {
+                        var halfCheck = data[i].getCheckStatus();
+                        if (halfCheck.half){//为半选则删除
+                            data.splice(i,1);
+                        };
+                    };
                     var temp = [];
                     angular.forEach(data,function(i){
                         var obj={
                             id:i.id,
-                            level:i.level+1
+                            level:getLevel(i.id)
                         }
                         temp.push(obj)
                     });
                     
-                    $scope.result.value = temp;
-                    // $scope.data.regionCheckDTOList = nodeData.id;
-                    var regionCheckDTOList = $scope.data.regionCheckDTOList;
-                    angular.forEach(regionCheckDTOList,function(item,key){
-                        if(item.id == treeNode.id){
-                            regionCheckDTOList.splice(key,1);
-                        }
+                    $scope.$apply(function(){
+                        $scope.result.value = temp;
+
                     })
+                    
+                    /**
+                    *   checked当前节点时，将当前节点以及其所有上级节点 和 regionCheckDTOList（原始已选数组）做对比。
+                    *   若存在，则从regionCheckDTOList中移除
+                    *   checked为false时，检查子节点，并从已选数组中移除
+                    */
+                    var regionCheckDTOList = $scope.data.regionCheckDTOList;
+                    for (var i = regionCheckDTOList.length - 1; i >= 0; i--) {
+                        if(treeNode.id.indexOf(regionCheckDTOList[i].id)==0){
+                            regionCheckDTOList.splice(i,1);
+                        }
+                    }
+                    
+                    if(!treeNode.checked){
+                        for (var i = regionCheckDTOList.length - 1; i >= 0; i--) {
+                            if(regionCheckDTOList[i].id.indexOf(treeNode.id)===0){
+                                regionCheckDTOList.splice(i,1);
+                            }
+                        };
+                    }
                     $scope.data.regionCheckDTOList = regionCheckDTOList;
                 };
+
+                function getLevel(id){
+                    switch(parseInt(id.length)){
+                        case 9:
+                            return 4;
+                            break;
+                        case 6:
+                            return 3;
+                            break;
+                        case 4:
+                            return 2;
+                            break;
+                        case 2:
+                            return 1;
+                            break;
+                    }
+                }
                 var setting = {
                     check:{
                         enable: true,
-                        chkStyle: "checkbox",
-                        chkboxType: { "Y": "ps", "N": "ps" },
-                        // nocheckInherit:true
+                        chkStyle: "checkbox"
                     },
                     data:{
                         simpleData: {
@@ -104,7 +148,8 @@ Directive:
                     },
                     callback: {
                         onClick: zTreeOnClick,
-                        onCheck: zTreeOnCheck
+                        onCheck: zTreeOnCheck,
+                        zTreeOnDblClick : zTreeOnClick
                     }
                 };
                 
@@ -115,9 +160,6 @@ Directive:
                         angular.forEach(temp,function(item){
                             if(item.checked == null){
                                 item.halfCheck=true;
-                                // item.checked = true;
-                            }else{
-                                item.halfCheck=false;
                             }
                         })
                         var zNodes = temp;
@@ -126,7 +168,7 @@ Directive:
                         }); 
                     }
                 });
-			   	
+                
             }]
         }
     }
