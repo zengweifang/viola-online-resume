@@ -149,7 +149,7 @@ Directive:
                     callback: {
                         onClick: zTreeOnClick,
                         onCheck: zTreeOnCheck,
-                        zTreeOnDblClick : zTreeOnClick
+                        zTreeOnDblClick : zTreeOnClick//避免双击导致数据重复
                     }
                 };
                 
