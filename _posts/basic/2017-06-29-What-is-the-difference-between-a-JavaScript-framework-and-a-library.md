@@ -19,3 +19,11 @@ Angularjs is MVC framework
 	但是类库就不一样了，控制权在你手中，想实现什么功能就实现什么功能，类库只是帮你封装好了大量实用的函数，帮助你实现自己的目的，你要做的只是根据自己的需要合适的调用这些函数。
 
 	类库和框架是用来解决静态网页技术在构建动态应用上的不足的最常用的技术。
+
+----
+
+a library - a collection of functions which are useful when writing web apps. Your code is in charge and it calls into the library when it sees fit. E.g., jQuery.
+
+frameworks - a particular implementation of a web application, where your code fills in the details. The framework is in charge and it calls into your code when it needs something app specific. E.g., angularjs, durandal, ember, etc.
+
+
