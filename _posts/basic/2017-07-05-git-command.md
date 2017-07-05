@@ -10,8 +10,8 @@ categories: basic
 ---
 
 > A.提交分支
-	1.提交到远程分支
-	git push origin branchName:branchName
+> * 提交到远程分支
+> * git push origin branchName:branchName
 
 > B.删除分支：
 	1 删除远程分支
@@ -61,7 +61,7 @@ categories: basic
 	git reset HEAD .
 	若取消某一个文件
 	git reset HEAD src/index.html
-	
+
 > K.git如何删除本地所有未提交的更改
 	1. git clean -df
 	这一个命令只删除所有untracked（未缓存）的文件
