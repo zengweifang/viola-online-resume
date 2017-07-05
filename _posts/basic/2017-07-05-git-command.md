@@ -10,7 +10,7 @@ categories: basic
 ---
 
 > A.提交分支
-> * 提交到远程分支
+> * 1 提交到远程分支
 > * git push origin branchName:branchName
 
 > B.删除分支：
@@ -20,12 +20,12 @@ categories: basic
 > * $ git branch -d branchName
 
 > C.标记tag
-> * 1.对当前分支打tag：
+> * 1 对当前分支打tag：
 > * $ git tag -a v1.4 -m 'my version 1.4'
 > * git tag tagContent
-> * 2.然后push到远程即可：
+> * 2 然后push到远程即可：
 > * git push origin tagName
-> * 3.删除本地tag
+> * 3 删除本地tag
 > * git tag -d tagName
 
 > D.创建分支
@@ -63,7 +63,7 @@ categories: basic
 > * git reset HEAD src/index.html
 
 > K.git如何删除本地所有未提交的更改
-> * 1. git clean -df
+> * 1 git clean -df
 > * 这一个命令只删除所有untracked（未缓存）的文件
 
 > L.reset到merge前的版本
