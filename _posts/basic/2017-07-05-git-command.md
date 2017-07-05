@@ -10,14 +10,14 @@ categories: basic
 ---
 
 > A.提交分支
-> * 1 提交到远程分支
-> * git push origin branchName:branchName
+* 1 提交到远程分支
+* git push origin branchName:branchName
 
 > B.删除分支：
-> * 1 删除远程分支
-> * $ git push origin :branchName
-> * 2 删除本地分支，强制删除用-D
-> * $ git branch -d branchName
+* 1 删除远程分支
+* $ git push origin :branchName
+* 2 删除本地分支，强制删除用-D
+* $ git branch -d branchName
 
 > C.标记tag
 > * 1 对当前分支打tag：
