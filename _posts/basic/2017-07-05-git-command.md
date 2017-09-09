@@ -70,5 +70,4 @@ categories: basic
 * $ git checkout 【行merge操作时所在的分支】
 * $ git reset --hard 【merge前的版本号】
 
-----
 

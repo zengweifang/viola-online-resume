@@ -4,15 +4,6 @@ layout: default
 
 <div id="main" role="main">			
 	<article class="wrap" itemscope itemtype="http://schema.org/Article">
-		{% if page.image.feature %}
-		<div class="page-feature">
-			<div class="page-image">
-				<img src="{{ site.url }}/images/{{ page.image.feature }}" class="page-feature-image" alt="{{ page.title }}" itemprop="image">
-				{% if page.image.credit %}{% include image-credit.html %}{% endif %}
-			</div><!-- /.page-image -->
-		</div><!-- /.page-feature -->
-		{% endif %}
-		{% include breadcrumbs.html %}
 		<div class="page-title">
 			<h3>{{ page.title }}</h3>
 		</div>
@@ -27,16 +18,9 @@ layout: default
 					{% if page.categories %}{% include page-author.html %}{% endif %}
 					{% if page.share != false %}{% endif %}
 					{% include page-meta.html %}
-				</footer><!-- /.footer -->
-				<aside>
-					{% include comments.html %}
-				</aside>
+				</footer>
 			</div><!-- /.content -->
 		</div><!-- /.inner-wrap -->
-        <!--
-            {% if page.ads %}<div class="ads">{% include advertising.html %}</div>{% endif %} 
-        -->
-		<!-- <div class="ads">{% include about-me.html %}</div> -->
 	</article><!-- ./wrap -->
 </div><!-- /#main -->
 {% include env.html %}

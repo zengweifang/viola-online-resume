@@ -18,5 +18,4 @@ macOS : sudo npm/cnpm install -g angular-cli
 ng new project_name(项目名)
 
 
-----
 
