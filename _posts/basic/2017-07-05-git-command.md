@@ -70,4 +70,22 @@ categories: basic
 * $ git checkout 【行merge操作时所在的分支】
 * $ git reset --hard 【merge前的版本号】
 
+> M.上传本地代码到github
+* 1 git init
+* 建立git仓库
+* 2 git add .
+* 将项目的所有文件添加到仓库中(如果想添加某个特定的文件，只需把.换成特定的文件名即可)
+* 3 git commit -m "注释语句"
+* 将add的文件conmmit到仓库
+* 4 去github上创建自己的repository
+* 5 git remote add origin http://git.wang-guanjia.com/front-end-2/zorro-project.git
+* 将本地的仓库关联到github上
+* 6 git pull origin master
+* 上传github之前，要先pull一下
+* 7 git push -u origin master
+* 上传代码到github远程仓库
+* (执行完后，如果没有异常，等待执行完就上传成功了，中间可能会让你输入Username和Password，
+* 你只要输入github的账号和密码就行了)
+
+
 
